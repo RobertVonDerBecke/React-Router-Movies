@@ -26,10 +26,9 @@ export default function Movie(props) {
 
   // Uncomment this only when you have moved on to the stretch goals
   const saveMovie = evt => {
-    const temp = [];
-    temp.push(evt.id)
+    // const temp = [];
+    // temp.push(evt.id)
     addToSavedList(evt)
-    console.log(id)
    }
 
   if (!movie) {

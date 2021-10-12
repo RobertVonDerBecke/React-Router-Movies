@@ -28,7 +28,6 @@ export default function App (props) {
 
   const addToSavedList = id => {
     setSaved([...saved, id])
-    console.log(saved)
     
   };
 
