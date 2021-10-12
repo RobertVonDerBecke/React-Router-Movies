@@ -6,16 +6,15 @@ import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
 import Movie from './Movies/Movie';
 
-export default function App () {
+export default function App (props) {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movieList, setMovieList] = useState([]);
-
+  
   useEffect(() => {
     const getMovies = () => {
       axios
         .get('http://localhost:5000/api/movies') // Study this endpoint with Postman
         .then(res => {
-          console.log(res.data[1].id)
           setMovieList(res.data)
           // Study this response with a breakpoint or log statements
           // and set the response data as the 'movieList' slice of state
@@ -28,17 +27,19 @@ export default function App () {
   }, []);
 
   const addToSavedList = id => {
-    // This is stretch. Prevent the same movie from being "saved" more than once
+    setSaved([...saved, id])
+    console.log(saved)
+    
   };
 
   return (
     <div>
-      <SavedList list={[ /* This is stretch */]} />
+      <SavedList list={saved}  />
 
       <div>
         <Switch>
           <Route path='/movies/:id'>
-            <Movie movies={movieList}/>
+            <Movie movies={movieList} addToSavedList={addToSavedList}/>
           </Route>
           <Route path='/'>
             <MovieList movies={movieList} />
